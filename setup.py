@@ -64,17 +64,17 @@ def get_version(rel_path):
 
 
 setup(
-    name='etchosts',
+    name='dnsmock',
     description='Python custom resolver',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    version=os.environ.get('ETCHOSTS_VERSION', '0.0.0'),
+    version=os.environ.get('DNSMOCK_VERSION', '0.0.0'),
     keywords='dns resolver socket',
     license='MIT',
     author='Jose Angel Munoz',
     author_email='josea.munoz@gmail.com',
-    url='https://github.com/imjoseangel/etchosts',
-    packages=['etchosts'],
+    url='https://github.com/imjoseangel/dnsmock',
+    packages=['dnsmock'],
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: Console',
