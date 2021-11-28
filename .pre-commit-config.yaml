@@ -1,0 +1,67 @@
+---
+fail_fast: false
+
+repos:
+
+  - repo: local
+    hooks:
+      - id: detect-secrets
+        name: Detect Secrets
+        description: This hook detects and prevents high entropy strings from entering the codebase.
+        entry: hooks/detect-secrets
+        language: python
+        files: .*
+
+      - id: check-mailmap
+        name: Detect if an email address needs to be added to mailmap
+        language: script
+        entry: hooks/check-mailmap
+        always_run: true  # Run on every commit.
+        exclude: .*       # Otherwise runs once per file.
+
+      - id: forbid-binary
+        name: forbid-binary (local)
+        language: script
+        entry: hooks/forbid-binary
+        types: ['binary']
+        exclude: >
+          (?x)^(
+            screenshot.png
+          )$
+
+      - id: git-dirty
+        name: git-dirty (local)
+        language: script
+        entry: hooks/git-dirty
+
+      - id: require-ascii
+        name: file encoding (local)
+        description: Ensure file is ascii-encoded
+        entry: hooks/require-ascii.py
+        language: python
+        types: [text]
+        exclude: ^ci/ansi$  # 3rd-party script
+
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: python
+        types: [python]
+        exclude: tests/functional/|tests/input|tests/extensions/data|tests/regrtest_data/|tests/data/|doc/
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: trailing-whitespace
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.18.1
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
