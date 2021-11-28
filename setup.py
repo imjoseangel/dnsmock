@@ -68,7 +68,7 @@ setup(
     description='Python custom resolver',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    version=os.environ.get('DNSMOCK_VERSION', '0.0.1'),
+    version=dnsmock.VERSION,
     keywords='dns resolver socket',
     license='MIT',
     author='Jose Angel Munoz',
