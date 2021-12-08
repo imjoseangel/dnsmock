@@ -10,9 +10,10 @@ EXPECTED_VERSION = '0.0.3'
 
 @pytest.fixture
 def mock_version():
-    '''Returns a Wallet instance with a balance of 20'''
+    '''Returns Version'''
     return dnsmock.VERSION
 
 
 def test_version(mock_version):
+    '''Test version'''
     assert mock_version == EXPECTED_VERSION
