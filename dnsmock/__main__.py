@@ -20,5 +20,13 @@
 
 import sys  # pragma: no cover
 
+
+def main():
+    """
+    Main function
+    """
+    return 0  # pragma: no cover
+
+
 if __name__ == '__main__':  # pragma: no cover
     sys.exit(main())
