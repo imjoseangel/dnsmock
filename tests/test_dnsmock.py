@@ -9,5 +9,11 @@ import dnsmock
 EXPECTED_VERSION = '0.0.3'
 
 
-def test_version():
-    assert dnsmock.VERSION == EXPECTED_VERSION
+@pytest.fixture
+def mock_version():
+    '''Returns a Wallet instance with a balance of 20'''
+    return dnsmock.VERSION
+
+
+def test_version(mock_version):
+    assert mock_version == EXPECTED_VERSION
