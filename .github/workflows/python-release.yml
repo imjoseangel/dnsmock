@@ -1,0 +1,72 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+rc[0-9]+'
+
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Get current tag
+      id: currenttag
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel
+    - name: Build project
+      env:
+        POWERLINEK8SSTATUS_VERSION: ${{ steps.currenttag.outputs.tag }}
+      run: |
+        make build
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ steps.currenttag.outputs.tag }}
+        release_name: Release ${{ steps.currenttag.outputs.tag }}
+        body: |
+          # DNSMock
+
+          [![CodeQL](https://github.com/imjoseangel/dnsmock/workflows/CodeQL/badge.svg)](https://github.com/imjoseangel/dnsmock/security/code-scanning) [![codecov](https://codecov.io/gh/imjoseangel/dnsmock/branch/devel/graph/badge.svg)](https://codecov.io/gh/imjoseangel/dnsmock) [![Python package](https://github.com/imjoseangel/dnsmock/workflows/Python%20package/badge.svg)](https://pypi.org/project/dnsmock/${{ steps.currenttag.outputs.tag }})
+
+          A DNSMock to mock DNS in containerized Python solutions.
+
+          By [imjoseangel][2]
+
+          Install with:
+          ```sh
+          pip install dnsmock==${{ steps.currenttag.outputs.tag }}
+          ```
+
+          ## License
+
+          Licensed under [the MIT License][1].
+
+          [1]: https://github.com/imjoseangel/dnsmock/blob/devel/LICENSE
+          [2]: https://imjoseangel.eu
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/dnsmock-${{ steps.currenttag.outputs.tag }}.tar.gz
+        asset_name: dnsmock-${{ steps.currenttag.outputs.tag }}.tar.gz
+        asset_content_type: application/tar+gzip
