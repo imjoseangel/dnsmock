@@ -42,8 +42,8 @@ class CleanCommand(Command):
                 if not path.startswith(here):
                     # Die if path in CLEAN_FILES is absolute + outside this directory
                     raise ValueError(
-                        "%s is not a path inside %s" % (path, here))
-                print('removing %s' % os.path.relpath(path))
+                        f"{path} is not a path inside {here}")
+                print(f'removing {os.path.relpath(path)}')
                 rmtree(path)
 
 
@@ -51,8 +51,8 @@ def read(rel_path):
 
     here = normpath(abspath(dirname(__file__)))
 
-    with codecs.open(os.path.join(here, rel_path), 'r') as fp:
-        return fp.read()
+    with codecs.open(os.path.join(here, rel_path), 'r') as fullpath:
+        return fullpath.read()
 
 
 def get_version(rel_path):
@@ -67,7 +67,7 @@ def get_version(rel_path):
 setup(
     name='dnsmock',
     description='Python custom resolver',
-    long_description=open("README.md").read(),
+    long_description=open("README.md", encoding="UTF-8").read(),
     long_description_content_type="text/markdown",
     version=dnsmock.VERSION,
     keywords='dns resolver socket',
