@@ -11,6 +11,7 @@ import os
 from os.path import abspath, dirname, normpath
 from shutil import rmtree
 from setuptools import setup, Command
+import dnsmock
 
 
 class CleanCommand(Command):
@@ -18,7 +19,7 @@ class CleanCommand(Command):
     CLEAN_FILES = ('./build', './dist', './*.pyc',
                    './*.tgz', './*.egg-info', './.pytest_cache',
                    '.benchmarks', './tests/__pycache__',
-                   './powerline_k8sstatus/__pycache__',
+                   './dnsmock/__pycache__',
                    './__pycache__')
 
     user_options = []
