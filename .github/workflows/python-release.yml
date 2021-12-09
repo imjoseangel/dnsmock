@@ -52,6 +52,18 @@ jobs:
           pip install dnsmock==${{ steps.currenttag.outputs.tag }}
           ```
 
+          ## Usage example
+
+          ```python
+          import dnsmock
+          import requests
+
+          dnsmock.bind_ip('www.example.com', 443, '127.0.0.1')
+          response = requests.get('https://www.example.com', verify=True)
+
+          print(response.text)
+          ```
+
           ## License
 
           Licensed under [the MIT License][1].
