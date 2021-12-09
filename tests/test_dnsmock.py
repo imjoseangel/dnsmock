@@ -43,3 +43,9 @@ def test_bind(mock_bind):
 def test_custom_resolver(mock_custom_resolver):
     '''Test custom resolver'''
     assert mock_custom_resolver == "(host, port, family=0, type=0, proto=0, flags=0)"
+
+
+@dnsmock.lib.custom_resolver
+def test_resolver_fail():
+    '''Test custom resolver'''
+    return dnsmock.lib.custom_resolver(socket.getaddrinfo)
