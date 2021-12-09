@@ -27,6 +27,7 @@ jobs:
       run: |
         pip install pytest
         pip install pytest-cov
+        pip install decorator
         pip install dnsmock
         pytest --cov=./ --cov-report=xml
 

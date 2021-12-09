@@ -85,6 +85,9 @@ setup(
         'Topic :: Terminals',
         'Topic :: Utilities'
     ],
+    install_requires=[
+        "decorator"
+    ],
     cmdclass={
         'clean': CleanCommand,
     }
