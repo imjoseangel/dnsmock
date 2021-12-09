@@ -36,7 +36,7 @@ install: ## Install in editable mode
 
 uninstall: ## Uninstall package
 		$(info Make: Uninstall package.)
-		pip uninstall powerline-k8sstatus
+		pip uninstall dnsmock
 
 test: ## Run unit tests
 		$(info Make: Run unit tests.)
