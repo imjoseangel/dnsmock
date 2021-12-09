@@ -21,7 +21,7 @@
 """Resolver Module"""
 
 import socket
-import decorator
+from functools import wraps
 
 
 # mock /etc/hosts
@@ -35,13 +35,15 @@ def custom_resolver(builtin_resolver):
     Custom resolver
     """
 
-    def wrapper(builtin_resolver, * args, **kwargs):
+    @wraps(builtin_resolver)
+    def wrapper(*args, **kwargs):
         try:
             return etc_hosts[args[:2]]
         except KeyError:
             # fall back to builtin_resolver for endpoints not in etc_hosts
             return builtin_resolver(*args, **kwargs)
-    return decorator.decorator(wrapper, builtin_resolver)
+
+    return wrapper
 
 
 def bind_ip(domain_name, port, ip_address):
