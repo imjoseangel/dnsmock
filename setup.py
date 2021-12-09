@@ -77,7 +77,7 @@ setup(
     url='https://github.com/imjoseangel/dnsmock',
     packages=['dnsmock'],
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
@@ -85,9 +85,7 @@ setup(
         'Topic :: Terminals',
         'Topic :: Utilities'
     ],
-    install_requires=[
-        "decorator"
-    ],
+    install_requires=[],
     cmdclass={
         'clean': CleanCommand,
     }
