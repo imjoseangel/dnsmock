@@ -7,7 +7,7 @@ import socket
 import pytest
 import dnsmock
 
-EXPECTED_VERSION = '21.2.beta1'
+EXPECTED_VERSION = '21.2.beta2'
 
 
 @pytest.fixture
