@@ -6,6 +6,7 @@ from inspect import signature
 import socket
 import pytest
 import dnsmock
+from dnsmock.lib import custom_resolver
 
 EXPECTED_VERSION = '0.0.3'
 
