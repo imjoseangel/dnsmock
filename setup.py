@@ -66,7 +66,8 @@ def get_version(rel_path):
 
 setup(
     name='DNS Mock',
-    description='Python DNS Mock to bypass current DNS resolution. Emulates /etc/hosts inside a container.',
+    description='Python DNS Mock to bypass current DNS resolution. \
+        Emulates /etc/hosts inside a container.',
     long_description=open("README.md", encoding="UTF-8").read(),
     long_description_content_type="text/markdown",
     version=dnsmock.VERSION,
